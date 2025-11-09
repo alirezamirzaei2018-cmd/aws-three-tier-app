@@ -28,7 +28,6 @@ This architecture ensures **scalability**, **fault tolerance**, and **security i
 | VPC Name | three-tier-vpc |
 | CIDR Block | 10.0.0.0/16 |
 
-
 ### 🌍 Subnets
 | Subnet Name | Type | CIDR | Availability Zone |
 |--------------|------|------|--------------------|
