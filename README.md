@@ -161,9 +161,11 @@ nano /home/ec2-user/app.py
 Paste the following code:
 ```python
 from flask import Flask, jsonify
+from flask_cors import CORS
 import pymysql
 
 app = Flask(__name__)
+CORS(app)
 
 # Connect to RDS
 db = pymysql.connect(
