@@ -51,20 +51,80 @@ This architecture ensures **scalability**, **fault tolerance**, and **security i
 
 ## 🔐 3. Bastion Host (Public Subnet)
 
-The **Bastion Host** provides secure SSH access to private EC2 instances.
+The **Bastion Host** acts as a secure jump server to SSH into private EC2 instances.  
+Since the private EC2s have no public IP, you must connect through the Bastion, which resides in the public subnet.
 
 | Setting | Value |
 |----------|--------|
-| AMI | Amazon Linux 2 |
-| Type | t2.micro |
-| Subnet | Public |
-| SG Rule | Port 22 from admin IP only |
+| **AMI** | Amazon Linux 2 |
+| **Type** | t2.micro |
+| **Subnet** | Public |
+| **Security Group Rule** | Allow inbound SSH (port 22) only from your own IP |
 
-Connect to private EC2:
+---
+
+### ⚙️ Step-by-Step Configuration
+
+#### 🟢 Step 1 — Connect to Bastion Host
+From your local system, SSH into the Bastion using the downloaded key pair:
+
 ```bash
 ssh -i three-tier-key.pem ec2-user@<BASTION_PUBLIC_IP>
-ssh ec2-user@<PRIVATE_EC2_IP>
 ```
+
+---
+
+#### 🟡 Step 2 — Copy the Private Key to Bastion
+You’ll need the same private key (`three-tier-key.pem`) inside the Bastion host to connect to private EC2 instances.
+
+From your **local machine**, use SCP to copy the key file into the Bastion:
+
+```bash
+scp -i three-tier-key.pem three-tier-key.pem ec2-user@<BASTION_PUBLIC_IP>:/home/ec2-user/
+```
+
+Once inside the Bastion, set the correct permissions:
+
+```bash
+chmod 400 three-tier-key.pem
+```
+
+---
+
+#### 🔵 Step 3 — Connect from Bastion to Private EC2
+Now you can SSH from the Bastion to your private EC2 instances using the same key:
+
+```bash
+ssh -i three-tier-key.pem ec2-user@<PRIVATE_EC2_IP>
+```
+
+Example:
+```bash
+ssh -i three-tier-key.pem ec2-user@10.0.2.107
+ssh -i three-tier-key.pem ec2-user@10.0.3.107
+```
+
+---
+
+#### 🧩 Step 4 — Verify the Connection
+Once connected, verify you’re on the private instance:
+
+```bash
+hostname
+ifconfig
+```
+
+You should see the private IP address of the instance (e.g., `10.0.2.x` or `10.0.3.x`).
+
+---
+
+### 🔒 Summary
+- Bastion Host resides in **Public Subnet** (with Internet Gateway access).  
+- EC2 application servers reside in **Private Subnets** (no public IPs).  
+- Access Flow:
+  ```
+  Local Machine → Bastion Host (Public Subnet) → Private EC2 (Private Subnet)
+  ```
 
 ---
 
