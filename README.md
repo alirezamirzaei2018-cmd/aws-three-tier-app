@@ -322,20 +322,8 @@ http://three-tier-frontend-alireza.s3-website.ca-central-1.amazonaws.com
 
 ---
 
-## 🧹 9. Clean-up Resources
 
-To avoid charges, delete resources in this order:
-
-1. **S3 Bucket** → Empty and delete  
-2. **ALB + Target Group**  
-3. **EC2 Instances**  
-4. **NAT Gateway** (releases Elastic IP)  
-5. **RDS Database**  
-6. **VPC and Subnets**
-
----
-
-## 🧠 10. AWS Services Summary
+## 🧠 9. AWS Services Summary
 
 | Service | Purpose |
 |----------|----------|
@@ -352,7 +340,7 @@ To avoid charges, delete resources in this order:
 
 ---
 
-## 🧰 11. Tools and Skills Demonstrated
+## 🧰 10. Tools and Skills Demonstrated
 
 - **AWS Services:** VPC, EC2, RDS, S3, ALB, IAM  
 - **Networking:** CIDR design, routing, NAT/IGW, SG rules  
@@ -362,7 +350,7 @@ To avoid charges, delete resources in this order:
 
 ---
 
-## 👨‍💻 12. Author
+## 👨‍💻 11. Author
 
 **Alireza Mirzaei**  
 📍 Toronto, Canada    
