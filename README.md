@@ -106,28 +106,6 @@ ssh -i three-tier-key.pem ec2-user@10.0.3.107
 
 ---
 
-#### 🧩 Step 4 — Verify the Connection
-Once connected, verify you’re on the private instance:
-
-```bash
-hostname
-ifconfig
-```
-
-You should see the private IP address of the instance (e.g., `10.0.2.x` or `10.0.3.x`).
-
----
-
-### 🔒 Summary
-- Bastion Host resides in **Public Subnet** (with Internet Gateway access).  
-- EC2 application servers reside in **Private Subnets** (no public IPs).  
-- Access Flow:
-  ```
-  Local Machine → Bastion Host (Public Subnet) → Private EC2 (Private Subnet)
-  ```
-
----
-
 ## 🗄️ 4. RDS (Database Layer)
 
 ### Database Configuration
