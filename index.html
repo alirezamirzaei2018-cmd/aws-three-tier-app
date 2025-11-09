@@ -1,0 +1,18 @@
+<html>
+  <body>
+    <h1>My AWS 3-Tier App</h1>
+    <p>Frontend hosted on S3 + Flask + RDS</p>
+    <button onclick="loadEmployees()">Load Employees</button>
+    <ul id="list"></ul>
+
+    <script>
+      async function loadEmployees() {
+        const res = await fetch('http://three-tier-alb-2138568177.ca-central-1.elb.amazonaws.com/employees');
+        const data = await res.json();
+        document.getElementById('list').innerHTML =
+          data.map(e => `<li>${e.id}: ${e.name}</li>`).join('');
+      }
+    </script>
+  </body>
+</html>
+
