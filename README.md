@@ -244,7 +244,7 @@ http://<ALB-DNS>
     "Effect":"Allow",
     "Principal":"*",
     "Action":["s3:GetObject"],
-    "Resource":["arn:aws:s3:::three-tier-frontend-alireza/*"]
+    "Resource":["arn:aws:s3:::three-tier-frontend/*"]
   }]
 }
 ```
